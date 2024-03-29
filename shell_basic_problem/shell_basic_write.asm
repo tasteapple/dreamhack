@@ -16,8 +16,9 @@ _start:
 _open:
     lea rdi, [rsp]
     mov rsi, 0
-    mov rax, 0x2
+    mov rax, 2
     syscall
+
 
 _read:
     mov rdi, rax
@@ -32,10 +33,6 @@ _write:
     syscall
 
 _exit:
-    mov rdi, 0
+    mov rdi,0
     mov rax, 60
     syscall
-
-;nasm -f elf64 write.asm
-;objcopy --dump-section .text=write.bin write.o
-;xxd write.bin
