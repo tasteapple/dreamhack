@@ -10,3 +10,9 @@ _start:
     xor    edx, edx
     mov    al, 0xb
     int    0x80
+
+;nasm -f elf shellcode.asm
+;objdump -d shellcode.o
+
+; objcopy --dump-section .text=shellcode.bin shellcode.o
+; xxd shellcode.bin
