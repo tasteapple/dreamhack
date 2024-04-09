@@ -6,6 +6,7 @@ context.arch = 'amd64'
 
 p = remote('host3.dreamhack.games', 21464)
 e = ELF('./basic_rop_x64')
+#로컬에서 안된다면 ldd ./file을 함으로 어디서 라이브러리를 참조하는지 확인
 libc = ELF('./libc.so.6', checksec=False)
 r = ROP(e)
 
