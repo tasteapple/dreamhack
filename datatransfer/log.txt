@@ -1,0 +1,20 @@
+Thu May 30 02:40:46 2024
+Event: [receiver - Packet Received], Type: 0, SeqNum: 0, AckNum: 0, Length: 200
+Thu May 30 02:40:46 2024
+Event: [receiver - ACK Sent], Type: 1, SeqNum: 1, AckNum: 0, Length: 0
+Thu May 30 02:40:46 2024
+Event: [receiver - Data Packet Loss], Type: 0, SeqNum: 0, AckNum: 0, Length: 200
+Thu May 30 02:40:51 2024
+Event: [receiver - Already received Packet; send ACK], Type: 1, SeqNum: 1, AckNum: 0, Length: 0
+Thu May 30 02:40:51 2024
+Event: [receiver - Data Packet Loss], Type: 0, SeqNum: 1, AckNum: 0, Length: 56
+Thu May 30 02:40:56 2024
+Event: [receiver - Packet Received], Type: 0, SeqNum: 1, AckNum: 0, Length: 56
+Thu May 30 02:40:56 2024
+Event: [receiver - ACK Sent], Type: 1, SeqNum: 2, AckNum: 1, Length: 0
+Thu May 30 02:40:56 2024
+Event: [reveiver - Packet Received], Type: 2, SeqNum: 2, AckNum: 0, Length: 0
+024
+Event: [sender - ACK Received], Type: 1, SeqNum: 2, AckNum: 1, Length: 0
+Thu May 30 02:40:56 2024
+Event: [sender - Send], Type: 2, SeqNum: 2, AckNum: 0, Length: 0
