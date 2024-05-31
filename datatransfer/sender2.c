@@ -8,7 +8,7 @@
 #include <signal.h>
 #include "packet.h"
 
-#define PORT 5005
+//#define PORT 5005
 #define BUF_SIZE 200
 #define TIMEOUT 2 // 소켓 연결 타임아웃 시간
 //#define FILE_NAME "test_file.txt"
@@ -39,7 +39,7 @@ void send_packet(int num) {
 }
 
 void sigalrm_handler(int sig) {
-    print_event("[sender - Timeout Packet; resend Packet]", &packet, log_file);
+    print_event("[sender - Timeout Packet]", &packet, log_file);
 }
 
 int main(int argc, char *argv[]) {
@@ -57,7 +57,6 @@ int main(int argc, char *argv[]) {
 
     signal(SIGALRM, sigalrm_handler); // 알람 시그널 설정
     srand(time(NULL)); // 난수 초기화
-    log_file = fopen("log.txt", "a");
 
     // 소켓 생성
     if ((sockfd = socket(AF_INET, SOCK_DGRAM, 0)) < 0) {
@@ -103,9 +102,9 @@ int main(int argc, char *argv[]) {
         exit(EXIT_FAILURE);
     }
 
-    printf("데이터 전송 중...\n");
+    log_file = fopen("sender_log.txt", "w");
 
-    //int acknum = -1;
+    printf("데이터 전송 중...\n");
 
     // 데이터 전송 및 ACK 수신
     while ((packet.length = fread(packet.data, sizeof(char), BUF_SIZE, file)) > 0) {
@@ -121,12 +120,12 @@ int main(int argc, char *argv[]) {
 
             // 데이터 패킷 로스
             if (n < 0) {
-                sleep(RESEND_TIME+1);
+                sleep(RESEND_TIME);
                 resend = 0;
             } else {
                 // ACK 패킷 로스
                 if ((double)rand() / RAND_MAX < drop_probability){
-                    alarm(0); // ACK 로스시 타이머 해제
+                    sleep(RESEND_TIME);
                     resend = 1;
                 }else{
                     // ACK 패킷 받음

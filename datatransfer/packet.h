@@ -20,6 +20,14 @@ typedef struct Packet {
     char data[1000];
 } Packet;
 
+void serialize(Packet *pkt, char *buffer) {
+    memcpy(buffer, pkt, sizeof(Packet));
+}
+
+void unserialize(char *buffer, Packet *pkt) {
+    memcpy(pkt, buffer, sizeof(Packet));
+}
+
 void print_event(const char *event, Packet *pkt, FILE *log_file) {
     time_t now = time(NULL);
     printf("%sEvent: %s, Type: %d, SeqNum: %d, AckNum: %d, Length: %d\n", ctime(&now), event, pkt->type, pkt->seqNum, pkt->ackNum, pkt->length);

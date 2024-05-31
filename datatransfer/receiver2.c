@@ -30,8 +30,6 @@ int main(int argc, char *argv[]) {
 
     srand(time(NULL)); // 난수 초기화
 
-    log_file = fopen("log.txt", "a");
-
     // 소켓 생성
     if ((sockfd = socket(AF_INET, SOCK_DGRAM, 0)) < 0) {
         perror("socket creation failed");
@@ -64,6 +62,7 @@ int main(int argc, char *argv[]) {
         exit(EXIT_FAILURE);
     }
 
+    log_file = fopen("receiver_log.txt", "w");
 
     int already_received = -1;
 
@@ -88,9 +87,6 @@ int main(int argc, char *argv[]) {
         }else{
             // 이미 받은 패킷인지 확인
             if (packet.seqNum <= already_received){
-                // 받은 패킷 출력
-                //print_event("Already received Packet ACK", &ackPacket);
-
                 ackPacket.type = ACK;
                 ackPacket.seqNum = packet.seqNum + 1;
                 ackPacket.ackNum = already_received;
@@ -115,6 +111,8 @@ int main(int argc, char *argv[]) {
 
         }
     }
+
+    printf("파일 수신 완료\n");
 
     fclose(file);
     close(sockfd);
